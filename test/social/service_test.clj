@@ -9,27 +9,18 @@
 
 (deftest home-page-test
   (is (=
-       (:body (response-for service :get "/"))
-       "Message!"))
+       "Message!"
+       (:body (response-for service :get "/"))))
   (is (=
-       (:headers (response-for service :get "/"))
-       {;"Content-Type" "text/html;charset=UTF-8"
-        "Content-Type" "text/plain"
+       {"Content-Type" "text/plain"
         "Strict-Transport-Security" "max-age=31536000; includeSubdomains"
         "X-Frame-Options" "DENY"
         "X-Content-Type-Options" "nosniff"
-        "X-XSS-Protection" "1; mode=block"})))
+        "X-XSS-Protection" "1; mode=block"}
+       (:headers (response-for service :get "/")))))
 
 
 (deftest create-message-test
-;   (is (.contains
-;        (:body (response-for service :post "/messages?user-id=daines&text=I got something to say!"))
-;        #"^[-0-9a-f]*$"))
   (is (=
-       (:headers (response-for service :post "/messages?user-id=daines&text=I got something to say!"))
-       {;"Content-Type" "text/html;charset=UTF-8"
-        "Content-Type" "text/plain"
-        "Strict-Transport-Security" "max-age=31536000; includeSubdomains"
-        "X-Frame-Options" "DENY"
-        "X-Content-Type-Options" "nosniff"
-        "X-XSS-Protection" "1; mode=block"})))
+       {"Content-Type" "text/plain"}
+       (:headers (response-for service :post "/messages?user-id=daines&text=I got something to say!")))))
