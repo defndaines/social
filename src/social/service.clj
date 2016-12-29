@@ -114,7 +114,7 @@
      ["/messages" {:get all-messages
                  ;; FIXME Not validating that id and text are present.
                  :message create-message}
-      ["/latest" 
+      ["/latest"
        ^:constraints {:limit #"^\d+$"
                       :scroll-id #"^\d+$"}
        {:get show-latest}]
